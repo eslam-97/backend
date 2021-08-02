@@ -15,7 +15,7 @@ use TCG\Voyager\Facades\Voyager;
 |
 */
 
-Route::get('/', [homeController::class, 'acessories']);
+Route::get('/', [homeController::class, 'home']);
 // Route::get('hotOffers', [Controller::class, 'hotOffers']);
 
 
