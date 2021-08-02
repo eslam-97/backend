@@ -10,7 +10,6 @@ use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller as BaseController;
-use Illuminate\Support\Facades\DB;
 
 class homeController extends BaseController
 {
@@ -38,11 +37,7 @@ class homeController extends BaseController
     }
 
     public function productCategories(){
-        // select('color', DB::raw('count(color)quantity'))->groupBy('color')->get();
-        // $categories = Brand::select('type', DB::raw('groupBy(type)quantity'))->groupBy('type')->get();
         $categories = Brand::select('type','en_brand','ar_brand')->get()->groupBy('type');
-        // $categories =  Brand::select('type',DB::raw('select(en_brand)'))->get();
-
         return response()->json($categories , 200);
 
     }

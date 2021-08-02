@@ -133,7 +133,6 @@ class indexController extends Controller
         if(is_null($wishListProduct)){
             return response()->json(["status" => "failed"], 204);
         }
-        // $wishlistProducts = $wishList->product->with('rating');
         return response()->json(['product'=>$products], 200);
 
     }

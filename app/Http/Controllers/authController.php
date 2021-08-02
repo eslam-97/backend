@@ -20,7 +20,6 @@ class authController extends Controller
 
 
     public function register(registerRequest $request) {
-        // return response($request['password']);
         if(isset($request->validator) && $request->validator->fails()) {
             return response()->json(["status" => "failed", "validation_errors" => $request->validator->messages()]);
         }
@@ -119,7 +118,7 @@ class authController extends Controller
 
 
 
-    public function updateUserPassword(Request $request){
+    public function updateUserPassword(updateUserRequest $request){
 
         if(isset($request->validator) && $request->validator->fails()) {
             return response()->json(["status" => "failed", "message" => $request->validator->messages()]);
@@ -138,28 +137,4 @@ class authController extends Controller
         }       
     }
 }
-
-    // edit image 
-    // if ($request->hasFile('userPhoto')) {
-    //     $photo = $this->savePhoto($request->userPhoto, 'Photos');
-    //     ######################### image delete ######################
-    //     $imageName = $user->image;
-    //     $image = 'photos/' . $imageName;
-    //     if ($imageName) {
-    //         File::delete($image);
-    //     }
-    //     ###############################
-    //     $user->image = $photo;
-    //     $user->save();
-    // }
-    // if (!$request->hasFile('userPhoto')) {
-    //     $user->image = $user->image;
-    //     $user->save();
-
-    // delete id $user = User::find($id);
-    // $imageName = $user->image;
-    // $image = 'photos/' . $imageName;
-    // if ($imageName) {
-    //     File::delete($image);
-    
 
