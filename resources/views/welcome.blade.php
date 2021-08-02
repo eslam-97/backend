@@ -31,6 +31,8 @@
 
 
 
-    
+      @foreach ($product as $proc)
+            <h2>{{$proc}}</h2>
+      @endforeach
     </body>
 </html>

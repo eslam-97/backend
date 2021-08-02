@@ -44,8 +44,8 @@ class homeController extends BaseController
     }
 
     public function home(){
-        
-        return View('welcome');
+      $product =   Product::get();
+        return View('welcome',compact($product));
 
     }
     
