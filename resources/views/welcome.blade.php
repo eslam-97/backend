@@ -31,8 +31,6 @@
 
 
 
-      @foreach ($products as $product)
-            <h2>{{$product}}</h2>
-      @endforeach
+    
     </body>
 </html>
