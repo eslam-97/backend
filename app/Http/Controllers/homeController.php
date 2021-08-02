@@ -46,22 +46,5 @@ class homeController extends BaseController
         return response()->json($categories , 200);
 
     }
-
-    // public function tablet(){
-    //     $products = Product::where('type','TABLET')->with('rating')->paginate(12);
-    //     return response()->json($products , 200);
-
-    //     // return view('welcome',compact('products'));
-    // }
-    // public function acessories(){
-    //     $products = Product::where('type','ACCESSORIES')->with('rating')->paginate(12);
-    //     return response()->json($products , 200);
-
-    //     // return view('welcome',compact('products'));
-    // }
-    // public function brandProducts(Request $req){
-    //     $products = $req->min;
-    //     return response()->json($products , 200);
-    // }
     
 }
