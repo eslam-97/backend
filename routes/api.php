@@ -4,7 +4,6 @@ use App\Http\Controllers\authController;
 use App\Http\Controllers\filtersController;
 use App\Http\Controllers\homeController;
 use App\Http\Controllers\indexController;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -18,13 +17,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-// Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-//     return $request->user();
-// });
-
 
 ###################################### authentication APIs #####################################################
-    // Route::middleware('web')->group(function () {
     Route::middleware('auth:sanctum')->group(function () {
         Route::post('updateUser', [authController::class, 'updateUser']);
         Route::post('updateUserPassword', [authController::class, 'updateUserPassword']);
@@ -38,7 +32,6 @@ use Illuminate\Support\Facades\Route;
         Route::post('addRating', [indexController::class, 'addRating']);
 
     });
-    // });
     
     Route::post('signUp', [authController::class, 'register']);
     Route::post('login', [authController::class, 'login']);

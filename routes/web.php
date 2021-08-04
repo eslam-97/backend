@@ -15,10 +15,6 @@ use TCG\Voyager\Facades\Voyager;
 |
 */
 
-Route::get('/', [homeController::class, 'home']);
-// Route::get('hotOffers', [Controller::class, 'hotOffers']);
-
-
 Route::group(['prefix' => 'admin'], function () {
     Voyager::routes();
 });

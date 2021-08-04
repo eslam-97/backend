@@ -9,30 +9,6 @@
             }
         </style>
     </head>
-    <body >dwwdw
-<h1>sssssssssssssssssssssssssssssss</h1>
-<h1>sssssssssssssssssssssssssssssss</h1>
-
-<h1>sssssssssssssssssssssssssssssss</h1>
-
-<h1>sssssssssssssssssssssssssssssss</h1>
-
-<h1>sssssssssssssssssssssssssssssss</h1>
-
-<h1>sssssssssssssssssssssssssssssss</h1>
-
-<h1>sssssssssssssssssssssssssssssss</h1>
-
-<h1>sssssssssssssssssssssssssssssss</h1>
-
-<h1>sssssssssssssssssssssssssssssss</h1>
-
-<h1>sssssssssssssssssssssssssssssss</h1>
-
-
-
-      @foreach ($product as $proc)
-            <h2>{{$proc}}</h2>
-      @endforeach
+    <body >
     </body>
 </html>

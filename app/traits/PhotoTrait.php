@@ -2,8 +2,6 @@
 
 namespace App\traits;
 
-use Illuminate\Support\Facades\Storage;
-use Illuminate\Http\UploadedFile;
 
 trait photoTrait
 {
