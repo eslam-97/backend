@@ -87,12 +87,12 @@ class authController extends Controller
     }
 
 
-    public function updateUser(updateUserRequest $request){
+    public function updateUser(updateUserRequest $request,$id){
 
         if(isset($request->validator) && $request->validator->fails()) {
             return response()->json(["status" => "failed", "message" => $request->validator->messages()]);
         }
-        $user = User::find($request->id);
+        $user = User::find($id);
 
         if ($request->hasFile('avatar')) {
             $imageName = $user->avatar;
@@ -118,13 +118,13 @@ class authController extends Controller
 
 
 
-    public function updateUserPassword(updateUserRequest $request){
+    public function updateUserPassword(updateUserRequest $request, $id){
 
         if(isset($request->validator) && $request->validator->fails()) {
             return response()->json(["status" => "failed", "message" => $request->validator->messages()]);
         }
 
-        $user = User::find($request->id);
+        $user = User::find($id);
         if(Hash::check($request->password, $user->password)){
         $user->password = Hash::make($request->newPassword);
         $user->save();

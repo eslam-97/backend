@@ -2,7 +2,6 @@
 
 use App\Http\Controllers\authController;
 use App\Http\Controllers\filtersController;
-use App\Http\Controllers\homeController;
 use App\Http\Controllers\indexController;
 use Illuminate\Support\Facades\Route;
 
@@ -18,52 +17,49 @@ use Illuminate\Support\Facades\Route;
 */
 
 
-###################################### authentication APIs #####################################################
-    Route::middleware('auth:sanctum')->group(function () {
-        Route::post('updateUser', [authController::class, 'updateUser']);
-        Route::post('updateUserPassword', [authController::class, 'updateUserPassword']);
-        Route::get('user', [authController::class, 'profile']);
-        Route::post('addToUserCart', [indexController::class, 'addToUserCart']);
-        Route::get('userCartProducts', [indexController::class, 'userCartProducts']);
-        Route::delete('deleteCartProduct', [indexController::class, 'deleteCartProduct']);
-        Route::post('addToUserWishList', [indexController::class, 'addToUserWishList']);
-        Route::get('userWishlistProducts', [indexController::class, 'userWishlistProducts']);
-        Route::delete('deleteWishlistProduct', [indexController::class, 'deleteWishlistProduct']);
-        Route::post('addRating', [indexController::class, 'addRating']);
-
-    });
-    
-    Route::post('signUp', [authController::class, 'register']);
-    Route::post('login', [authController::class, 'login']);
-    Route::post('logout', [authController::class, 'signOut']);
+############################################### Auth APIs ##########################################################
 
 
-    
-    ###################################### resources APIs ##########################################################
-    ############ HOME APIs ############
-    Route::get('hotOffers', [homeController::class, 'hotOffers']);
-    Route::get('bestSeller', [homeController::class, 'bestSeller']);
-    Route::get('newArrival', [homeController::class, 'newArrival']);
-    Route::get('search', [homeController::class, 'search']);
-    Route::get('productCategories', [homeController::class, 'productCategories']);
-    
-
-    ############ filters API ############
-    Route::get('allProducts', [filtersController::class, 'allProducts']);
-    Route::get('product', [filtersController::class, 'product']);
-    Route::get('productBrand', [filtersController::class, 'productBrand']);
-    Route::get('productColor', [filtersController::class, 'productColor']);
-    Route::get('productOperatingSystem', [filtersController::class, 'productOperatingSystem']);
-    Route::get('productByBrand', [filtersController::class, 'productByBrand']);
-    Route::get('productByColor', [filtersController::class, 'productByColor']);
-    Route::get('productByOperatingSystem', [filtersController::class, 'productByOperatingSystem']);
+Route::post('/signUp', [authController::class, 'register']);
+Route::post('/login', [authController::class, 'login']);
 
 
-     ############ Index APIs ############
-     Route::get('productSpecs', [indexController::class, 'productSpecs']);
-     Route::get('ratingUsers', [indexController::class, 'ratingUsers']);
-    
+########################################## Sanctum Middleware APIs ################################################
+
+
+Route::middleware('auth:sanctum')->group(function () {
+    Route::get('/user', [authController::class, 'profile']);
+    Route::put('/user/{id}', [authController::class, 'updateUser']);
+    Route::put('/user-password/{id}', [authController::class, 'updateUserPassword']);
+
+    Route::get('/user/cart/products', [indexController::class, 'userCartProducts']);
+    Route::post('/user/cart/product/{id}', [indexController::class, 'addToUserCart']);
+    Route::delete('/user/cart/product/{id}', [indexController::class, 'deleteCartProduct']);
+
+    Route::get('/user/wishlist/products', [indexController::class, 'userWishlistProducts']);
+    Route::post('/user/wishlist/product/{id}', [indexController::class, 'addToUserWishList']);
+    Route::delete('/user/wishlist/product/{id}', [indexController::class, 'deleteWishlistProduct']);
+
+    Route::post('/product/{id}/review', [indexController::class, 'addRating']);
+    Route::post('/logout', [authController::class, 'signOut']);
+});
+
+
+######################################### resources APIs ########################################################
+
+    Route::get('/products', [filtersController::class, 'products']);
+    Route::get('/product/{id}', [filtersController::class, 'product']);
+    Route::get('/product/{id}/specs', [indexController::class, 'productSpecs']);
+    Route::get('/product/{id}/reviewers', [indexController::class, 'ratingUsers']);
+    Route::get('/products/search', [filtersController::class, 'search']);
+    Route::get('/products/categories', [filtersController::class, 'productCategories']);
+    Route::get('/products/brands', [filtersController::class, 'productBrand']);
+    Route::get('/products/colors', [filtersController::class, 'productColor']);
+    Route::get('/products/operating-systems', [filtersController::class, 'productOperatingSystem']);
  
+
+
+
  
     
 
