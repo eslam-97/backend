@@ -51,6 +51,7 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/product/{id}', [filtersController::class, 'product']);
     Route::get('/product/{id}/specs', [indexController::class, 'productSpecs']);
     Route::get('/product/{id}/reviewers', [indexController::class, 'ratingUsers']);
+    Route::get('/products/prices', [filtersController::class, 'prices']);
     Route::get('/products/search', [filtersController::class, 'search']);
     Route::get('/products/categories', [filtersController::class, 'productCategories']);
     Route::get('/products/brands', [filtersController::class, 'productBrand']);
