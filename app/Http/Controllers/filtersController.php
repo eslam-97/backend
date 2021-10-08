@@ -17,16 +17,6 @@ public function product($id){
         return response()->json($product , 200);
     }
 
-public function prices(Request $request){
-
-    $products = Product::where('type',$request->type);
-    $max_price = $products->max('totalprice');
-    $min_price = $products->min('totalprice');
-
-    return response()->json([$min_price,$max_price] , 200);
-}
-
-
 public function products(Request $request){
 
     $products_type = $request->input('type',['laptop','mobile','tablet','accessories']);
@@ -154,8 +144,18 @@ public function search(Request $request){
 
 }
 
+public function priceRanges(Request $request){
+
+    $products = Product::where('type',$request->type);
+    $max_price = $products->max('totalprice');
+    $min_price = $products->min('totalprice');
+
+    return response()->json([$min_price,$max_price] , 200);
+}
+
+
 public function productCategories(){
     $categories = Brand::select('type','en_brand','ar_brand')->get()->groupBy('type');
     return response()->json($categories , 200);
-}
+    }
 }

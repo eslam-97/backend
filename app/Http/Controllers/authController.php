@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\cartNotification;
 use App\Http\Requests\loginRequest;
 use App\Http\Requests\registerRequest;
 use App\Http\Requests\updateUserRequest;
@@ -62,7 +63,6 @@ class authController extends Controller
         if(Auth::attempt(['email' => $request->email, 'password' => $request->password])){
             $user = Auth::user();
             $token = $user->createToken('token')->plainTextToken;
-
             return response()->json(["status" => "success", "login" => true, "token" => $token, "user" => $user]);
         }
         else {
@@ -71,28 +71,28 @@ class authController extends Controller
     }
 
 
-    public function profile()
-    {
-    return  Response()->json(auth('sanctum')->user());
+    public function profile() {
+        return  Response()->json(auth('sanctum')->user());
     }
 
 
     public function signOut() {
 
-     if(auth('sanctum')->user()->tokens()->each(function($token, $key){
-        $token->delete();
+        if(auth('sanctum')->user()->tokens()->each(function($token, $key){
+            $token->delete();
             })){
             return Response()->json(['msg'=>'sign out']);
+            }
         }
-    }
 
 
-    public function updateUser(updateUserRequest $request,$id){
+    public function updateUser(updateUserRequest $request){
 
         if(isset($request->validator) && $request->validator->fails()) {
             return response()->json(["status" => "failed", "message" => $request->validator->messages()]);
         }
-        $user = User::find($id);
+        $user_id = auth('sanctum')->user()->id;
+        $user = User::find($user_id);
 
         if ($request->hasFile('avatar')) {
             $imageName = $user->avatar;
@@ -118,13 +118,13 @@ class authController extends Controller
 
 
 
-    public function updateUserPassword(updateUserRequest $request, $id){
+    public function updateUserPassword(updateUserRequest $request){
 
         if(isset($request->validator) && $request->validator->fails()) {
             return response()->json(["status" => "failed", "message" => $request->validator->messages()]);
         }
-
-        $user = User::find($id);
+        $user_id = auth('sanctum')->user()->id;
+        $user = User::find($user_id);
         if(Hash::check($request->password, $user->password)){
         $user->password = Hash::make($request->newPassword);
         $user->save();
